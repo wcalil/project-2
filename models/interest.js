@@ -11,10 +11,7 @@ module.exports = function(sequelize, DataTypes) {
 
 Interest.associate = function(models) {
   Interest.belongsToMany(models.User, {
-    through: 'Interest',
-    as: 'Interest',
-    foreignKey: 'Interest ID',
-    otherKey: 'User ID'
+    through: 'UserInterest'
   });
 
 };
