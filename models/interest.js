@@ -1,21 +1,28 @@
 
 // Creating our Interest model
-module.exports = function(sequelize, DataTypes) {
+module.exports = function (sequelize, DataTypes) {
   var Interest = sequelize.define("Interest", {
-     Interest: {
+    Interest: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
+
     },
+
   });
 
-Interest.associate = function(models) {
-  Interest.belongsToMany(models.User, {
-    through: 'UserInterest'
-  });
+  Interest.associate = function (models) {
+    Interest.belongsToMany(models.User, {
+      through: 'UserInterest'
+    });
+  };
+  Interest.associate = function (models) {
+    Interest.hasMany(models.Hangout, {
+      onDelete: "cascade"
+    });
 
-};
+  };
 
-return Interest;
+  return Interest;
 
 };
