@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Passport Authentication</title>
+  <title>Hangrr - Welcome</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/lumen/bootstrap.min.css">
@@ -11,25 +11,58 @@
 
 <body>
   <nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="/logout">
-        Logout
-      </a>
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="/logout">
+          Logout
+        </a>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
   <div class="container">
     <div class="row">
-      <div class="col-md-6 col-md-offset-3">
+      <div class="col-md-6 Welcome">
         <h2>Welcome <span class="member-name"></span></h2>
+        <br>
       </div>
+      <div class="col-md-6"></div>
+    </div>
+  </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+    <div id="hangouts"></div>
+    </div>
+    <div class="col-md-6">
+      <div id="map">
+      </div>
+    </div>
+  </div>
+  <br>
+  <a class="btn btn-primary" id="postHangout" href="/newHangout">
+ Post a New Hangout                   
+  </a>
+  <div class="container">
+    <div class= "row">
+      <div class="col-md-3">
+        <p><img src="..." class="img-fluid" alt="profile pic"></p>
+        <br>
+        <p>USERNAME</p>
+        <p>OCCUPATION: DOG PETTER</p>
+  <p><button>AAAAAAcCREATE AAAAA HANGOUTAAAAA</button></p>
+  <p>jdfKJKJ CKJBK SBKBl dkj fjBKJKJBLJA B KJBLJBKJbk j ksjKLJDBS Lkbds ljbwl</p>
+  </div>
+      <div class="col-md-2"><p>jdfK JKJCKJB KSBKBl dkjfjBK JKJBLJAB KJBLJBKJbk j ksjKLJDBS Lkbds ljbw</p></div>
+      <div class="col-md-7"><p>jdfKJK JCK JBKSBKBl dkjfj BKJKJBL JAB KJBLJBKJbk j ksjKLJDBS Lkbds ljbw jdfKJK JCK JBKSBKBl dkjfj BKJKJBL JAB KJBLJBKJbk j ksjKLJDBS Lkbds ljbw</p></div>
     </div>
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script type="text/javascript" src="js/members.js"></script>
 
+  <script type="text/javascript"
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAejCVcVUkYiYvaLeQ8v84SSXfi4F30ucw&libraries=places"></script>
+  <script src="../public/js/script.js"></script>
 </body>
 
 </html>
