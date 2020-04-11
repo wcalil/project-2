@@ -9,9 +9,10 @@ $(document).ready(function() {
     hangouts.prepend("<br>")
     data.hangouts.forEach(hangout=>{
       let hangDiv = $("<div></div>")
-      hangDiv.append("<p> You have the Hangout " + hangout.InterestId + " scheduled in " + hangout.City + "</p> <br>");
+      hangDiv.append("<p> You have a new hangout " + "<spam  style='font-weight:bold'>" + hangout.HangoutInput + "</spam>" + " scheduled in " + hangout.City + "</p>" + " in " + hangout.Date);
+      hangDiv.append("<p> Description: " + hangout.HangoutComment + "<p>" + "<br>");
       hangouts.append(hangDiv)
-    
+     
     })
   });
 });
