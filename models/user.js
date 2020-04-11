@@ -3,8 +3,14 @@ var Interest = require("./interest.js");
 
 console.log(Interest)
 
-module.exports = function(sequelize, DataTypes) {
+module.exports = function (sequelize, DataTypes) {
   var User = sequelize.define("User", {
+  
+    username: {
+      type: DataTypes.STRING, 
+      unique: true,
+      allowNull: false
+    },
 
     email: {
       type: DataTypes.STRING,
@@ -21,22 +27,28 @@ module.exports = function(sequelize, DataTypes) {
 
   });
 
-  User.associate = function(models) {
+  User.associate = function (models) {
     User.belongsToMany(models.Interest, {
       through: 'UserInterest'
     });
+    
+
+  User.associate = function (models) {
+      User.hasMany(models.Hangout, {
+          onDelete: "cascade"
+      });
 
   };
 
-
+};
 
   // Creating a custom method for our User model. This will check if an unhashed password entered by the user can be compared to the hashed password stored in our database
-  User.prototype.validPassword = function(password) {
+  User.prototype.validPassword = function (password) {
     return bcrypt.compareSync(password, this.password);
   };
   // Hooks are automatic methods that run during various phases of the User Model lifecycle
   // In this case, before a User is created, we will automatically hash their password
-  User.addHook("beforeCreate", function(user) {
+  User.addHook("beforeCreate", function (user) {
     user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10), null);
   });
   return User;

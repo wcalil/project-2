@@ -19,6 +19,7 @@ module.exports = function(app) {
   // otherwise send back an error
   app.post("/api/signup", function(req, res) {
     db.User.create({
+      username: req.body.username,
       email: req.body.email,
       password: req.body.password
     })
@@ -36,18 +37,107 @@ module.exports = function(app) {
     res.redirect("/");
   });
 
+
   // Route for getting some data about our user to be used client side
   app.get("/api/user_data", function(req, res) {
     if (!req.user) {
       // The user is not logged in, send back an empty object
       res.json({});
     } else {
+
+      db.Hangout.findAll({
+        where: {
+          UserId: req.user.id
+        }
+      }).then(userHangouts=>{
+        res.json({
+          username: req.user.username,
+          email: req.user.email,
+          id: req.user.id,
+          hangouts: userHangouts
+        });
+      })
       // Otherwise send back the user's email and id
       // Sending back a password, even a hashed password, isn't a good idea
-      res.json({
-        email: req.user.email,
-        id: req.user.id
-      });
+      
     }
   });
+
+  // INTEREST
+
+  // Creates route for posting User interest
+  app.post("/api/interest", function(req,res) {
+      console.log(req.body);
+      db.Interest.create({
+          Interest: req.body.Interest
+      })
+      .then(function(dbInterest){
+          res.json(dbInterest)
+      })
+  });
+  // Delete route for User interests
+  app.delete("/api/interest/:id", function(req,res) {
+      db.Interest.destroy({
+          where: {
+              id: req.params.id
+          }
+      })
+      .then(function(dbInterest){
+          res.json(dbInterest);
+      })
+  })
+  // Update your Users interests
+  app.put("/api/interest", function(req,res) {
+      db.Interest.update(req.body,{ where: {id: req.body.id}}
+      ).then(function(dbInterest) {
+          res.json(dbInterest);
+      })
+  })
+
+  app.get("/api/interest", function(req,res) {
+    db.Interest.findAll({}).then(function(dbInterest) {
+        res.json(dbInterest);
+    })
+})
+
+ // HANGOUTS
+
+   // Creates route for posting User interest
+   app.post("/api/hangout", function(req,res) {
+    console.log(req.body);
+    db.Hangout.create({
+        City: req.body.City,
+        Date: new Date(req.body.Date),
+        UserId: req.body.UserId,
+        InterestId: req.body.InterestId
+    })
+    .then(function(dbHangout){
+        res.json(dbHangout)
+    })
+});
+  // Delete route for User interests
+  app.delete("/api/hangout/:id", function(req,res) {
+    db.Hangout.destroy({
+        where: {
+            id: req.params.id
+        }
+    })
+    .then(function(dbHangout){
+        res.json(dbHangout);
+    })
+})
+// Update your Users interests
+app.put("/api/hangout", function(req,res) {
+    db.Hangout.update(req.body,{ where: {id: req.body.id}}
+    ).then(function(dbHangout) {
+        res.json(dbHangout);
+    })
+})
+
+app.get("/api/hangout", function(req,res) {
+  db.Hangout.findAll({}).then(function(dbHangout) {
+      res.json(dbHangout);
+  })
+})  
+  
 };
