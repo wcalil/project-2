@@ -10,7 +10,9 @@ $(document).ready(function() {
     data.hangouts.forEach(hangout=>{
       let hangDiv = $("<div></div>")
       hangDiv.append("<p> You have a new hangout " + "<spam  style='font-weight:bold'>" + hangout.HangoutInput + "</spam>" + " scheduled in " + hangout.City + "</p>" + " in " + hangout.Date);
-      hangDiv.append("<p> Description: " + hangout.HangoutComment + "<p>" + "<br>");
+      hangDiv.append("<p> Description: " + hangout.HangoutComment + "<p>");
+      hangDiv.append("<img id='trash' src='../images/trash.png' type='image/png'>" + "<br>")
+      hangDiv.append("<hr style='border-top: 10px solid rgb(254, 250, 246)'>")
       hangouts.append(hangDiv)
      
     })
