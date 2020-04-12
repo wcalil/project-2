@@ -18,6 +18,11 @@ module.exports = function(app) {
      res.sendFile(path.join(__dirname, "../public/newHangout.html"));
   });
 
+  app.get("/hangout/:id", function(req, res) {
+    console.log("ID Route", req.params.id)
+    res.sendFile(path.join(__dirname, "../public/newHangout.html"));
+ });
+
 
   app.get("/login", function(req, res) {
     // If the user already has an account send them to the members page
@@ -31,6 +36,11 @@ module.exports = function(app) {
   // If a user who is not logged in tries to access this route they will be redirected to the signup page
   app.get("/members", isAuthenticated, function(req, res) {
     res.sendFile(path.join(__dirname, "../public/members.html"));
+  });
+
+  app.get("/newsFeed", function(req, res) {
+    res.sendFile(path.join(__dirname, "../public/newsFeed.handlebars"));
+  
   });
 
 };

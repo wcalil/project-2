@@ -1,7 +1,5 @@
 var bcrypt = require("bcryptjs");
-var Interest = require("./interest.js");
 
-console.log(Interest)
 
 module.exports = function (sequelize, DataTypes) {
   var User = sequelize.define("User", {
@@ -20,18 +18,14 @@ module.exports = function (sequelize, DataTypes) {
         isEmail: true
       }
     },
+
     password: {
       type: DataTypes.STRING,
       allowNull: false
     }
 
   });
-
-  User.associate = function (models) {
-    User.belongsToMany(models.Interest, {
-      through: 'UserInterest'
-    });
-    
+   
 
   User.associate = function (models) {
       User.hasMany(models.Hangout, {
@@ -39,8 +33,6 @@ module.exports = function (sequelize, DataTypes) {
       });
 
   };
-
-};
 
   // Creating a custom method for our User model. This will check if an unhashed password entered by the user can be compared to the hashed password stored in our database
   User.prototype.validPassword = function (password) {

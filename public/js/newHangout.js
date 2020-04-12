@@ -13,57 +13,66 @@ $(document).ready(function() {
   }
 
   // Getting jQuery references to the post body, hangout, form, and date select
-  var bodyInput = $("#hangoutComment");
-  var hangoutInput = $("#hangout");
-  var hangoutLocation = $("#hangoutLocation");
-  var hangoutform = $("#hangoutform");
-  var dateSelect = $("#hangOutDate");
-  // Giving the dateSelect a default value
-  // dateSelect.val("Personal");
+  var hangoutForm = $("#hangoutForm");
+  var HangoutInput = $("#hangout");
+  var HangoutComment = $("#HangoutComment");
+  var City = $("#City");
+  var Date = $("#hangOutDate");
+  var submitButton = $("#submitButton")
+  
+  // $(hangoutForm).on("submit", function handleFormSubmit(event) {
+  //   event.preventDefault();
+  // Giving the Date a default value
+  // Date.val("Personal");
   // Adding an event listener for when the form is submitted
-  $(hangoutform).on("submit", function handleFormSubmit(event) {
+  submitButton.on("click", function handleFormSubmit(event) {
     event.preventDefault();
     // Wont submit the post if we are missing a body or a hangout
-    if (!hangoutInput.val().trim() || !bodyInput.val().trim()) {
+    if (!HangoutInput.val().trim() || !HangoutComment.val().trim()) {
       return;
     }
     // Constructing a newHangout object to hand to the database
     var newHangout = {
-      hangout: hangoutInput.val().trim(),
-      hangoutLocation: hangoutLocation.val().trim(),
-      hangoutComment: bodyInput.val().trim(),
-      date: dateSelect.val()
+      HangoutInput: HangoutInput.val().trim(),
+      HangoutComment: HangoutComment.val().trim(),
+      City: City.val().trim(),
+      Date: Date.val()
     };
+    
+    submitPost(newHangout);
 
-    console.log(newHangout);
+    // console.log(newHangout);
 
     // If we're updating a post run updatePost to update a post
     // Otherwise run submitPost to create a whole new post
-    if (updating) {
-      newHangout.id = postId;
-      updatePost(newHangout);
-    }
-    else {
-      submitPost(newHangout);
-    }
+    // if (updating) {
+    //   newHangout.id = postId;
+    //   updatePost(newHangout);
+    // }
+    // else {
+    //   submitPost(newHangout);
+    // }
   });
 
   // Submits a new post and brings user to his/her profile page upon completion
+  
   function submitPost(Post) {
-    $.post("/api/hangout/", Post, function() {
-      window.location.href = "/members";
+    console.log("Submiting Post", Post)
+
+    $.post("/api/hangout", Post, function() {
+      // window.location.href = "/members";
     });
   }
 
   // Gets post data for a post if we're editing
   function getPostData(id) {
-    $.get("/api/posts/" + id, function(data) {
+    $.get("/api/hangout" + id, function(data) {
       if (data) {
-        // If this post exists, prefill our cms forms with its data
-        hangoutInput.val(data.hangout);
-        hangoutLocation: val(data.hangoutLocation);
-        bodyInput.val(data.body);
-        dateSelect.val(data.date);
+        // If this post exists, prefill our hangout forms with its data
+        HangoutInput.val(data.HangoutInput);
+        HangoutComment.val(data.HangoutComment);
+        City: val(data.City);
+        Date.val(data.Date);
         // If we have a post with this id, set a flag for us to know to update the post
         // when we hit submit
         updating = true;
@@ -75,7 +84,7 @@ $(document).ready(function() {
   function updatePost(post) {
     $.ajax({
       method: "PUT",
-      url: "/api/hangouts",
+      url: "/api/hangout",
       data: post
     })
       .then(function() {
