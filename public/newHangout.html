@@ -11,15 +11,19 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </head>
 
-<body>
+<body class="hangoutSecondaryImage">
   <div class="container">
     <div class="row">
       <div class="row">
         <div class="col-sm-2 mt-4">
-          <a class="btn btn-light" href="./members">Go to Your Profile</a>
+          <a class="btn btn-primary" id="postHangout" href="./members">Go To My Profile</a>
+          <br>
+          <br>
+          <a class="btn btn-primary" id="goNewsFeed"href="./newsFeed">Go To The News Feed</a>
         </div>
+
       </div>
-      <div class="col-md-5 offset-md-3">
+      <div class="col-md-4 offset-md-2">
         <form id="hangoutform">
           <div class="form-group">
             <label for="title">Hangout</label>
@@ -35,7 +39,7 @@
               <form>
                 <label form="hangOutDate">When:</label>
                 <input type="date" id="hangOutDate" name="hangOutDate">
-                <input type="submit" value="Submit">
+                <!-- <input type="submit" value="Submit"> -->
               </form>
             </div>
             <br />

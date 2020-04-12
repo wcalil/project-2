@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Hangrrs Profile</title>
+  <title>Passport Authentication</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/lumen/bootstrap.min.css">
@@ -24,43 +24,37 @@
     <div class="row">
       <div class="col-md-3"></div>
       <div class="col-md-6 Welcome">
-        <h2 id="initialGreeting">Welcome <span class="member-name"></span></h2>
-        <h3>Check Out Your Latest Hangouts</h3>
+        <h2>Check Out the Latest Hangouts <span class="member-name"></span></h2>
         <br>
       </div>
       <div class="col-md-3"></div>
     </div>
 
-
     <div class="row">
       <div class="col-md-3"></div>
       <div class="col-md-6">
-        <div id="hangouts"></div>
-        <div class="row">
-          <div class="col-md-6">
-            <a class="btn btn-primary" id="postHangout" href="/newHangout">
-              Post a New Hangout
-            </a>
-          </div>
-          <div class="col-md-6">
-            <a class="btn btn-primary" style="float: right" id="goNewsFeed" href="/newsFeed">
-              Go To The Newsfeed
-            </a>
-          </div>
-        </div>
-      </div>
-      <br>
+        <ul>
+          {{#each Hangout}}
+          <li>
+            <p>
+              {{this.HangoutInput}}
+              {{this.HangoutComment}}
 
+              {{!-- <button data-planid="{{this.id}}" class="delplan">Delete Plan!</button> --}}
+            </p>
+          </li>
+          {{/each}}
+        </ul>
+      </div>
       <div class="col-md-3"></div>
-      <!-- <div class="col-md-6">
-        <div id="map">
-        </div>
-      </div> -->
     </div>
 
   </div>
-  <br>
 
+  <br>
+  <a class="btn btn-primary" id="postHangout" href="/newHangout">
+    Post a New Hangout
+  </a>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script type="text/javascript" src="js/members.js"></script>
