@@ -85,7 +85,8 @@ module.exports = function (app) {
         res.json(dbHangout)
       })
   });
-  // Delete route for User interests
+
+  // Delete route for User hangout
   app.delete("/api/hangout/:id", function (req, res) {
     db.Hangout.destroy({
       where: {
@@ -96,7 +97,7 @@ module.exports = function (app) {
         res.json(dbHangout);
       })
   })
-  // Update your Users interests
+  // Update your Users Hangout
   app.put("/api/hangout/:id", function (req, res) {
     db.Hangout.update(req.body, { where: { id: req.body.id } }
     ).then(function (dbHangout) {
