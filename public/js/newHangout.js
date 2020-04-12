@@ -60,7 +60,7 @@ $(document).ready(function() {
     console.log("Submiting Post", Post)
 
     $.post("/api/hangout", Post, function() {
-      // window.location.href = "/members";
+      window.location.href = "/members";
     });
   }
 

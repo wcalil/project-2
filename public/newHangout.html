@@ -51,7 +51,13 @@
   </div>
 
   <script src="./js/newHangout.js" type="text/javascript"></script>
-
+<script>
+  function activatePlacesSearch(){
+    var input = document.getElementById("City");
+    var autocomplete = new google.maps.places.Autocomplete(input);
+  }
+</script>
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAejCVcVUkYiYvaLeQ8v84SSXfi4F30ucw&libraries=places&callback=activatePlacesSearch"></script>
 </body>
 
 </html>
