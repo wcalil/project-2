@@ -1,0 +1,70 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/logout">
+        Logout
+      </a>
+    </div>
+  </div>
+</nav>
+<div class="containerWelcome">
+
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 Welcome">
+      <h2>Check Out the Latest Hangouts <span class="member-name"></span></h2>
+      <br>
+    </div>
+    <div class="col-md-3"></div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+      <div class="row">
+        <div class="hangoutNewsFeed">
+          {{#each Hangout}}
+
+          <p>
+            <br>
+            Posted by {{this.UserId}}
+            <br>
+            There will be a hangout
+            {{this.HangoutInput}}
+            going on in
+            {{this.Date}}
+            at
+            {{this.City}}
+            <br>
+            The hangout is about:
+            {{this.HangoutComment}}
+            <br>
+
+            {{!-- <button data-planid="{{this.id}}" class="delplan">Delete Plan!</button> --}}
+          </p>
+          <img id='join' src='../images/Favorites.png' type='image/png'>
+          <br>
+          <hr style='border-top: 10px solid rgb(254, 250, 246)'>
+
+          {{/each}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <a class="btn btn-primary" id="postHangout" href="/newHangout">
+            Post a New Hangout
+          </a>
+        </div>
+        <div class="col-md-6">
+          <a class="btn btn-primary" style="float: right" id="goNewsFeed" href="/members">
+            Go To Your Profile
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3"></div>
+  </div>
+
+</div>
+
+<br>
