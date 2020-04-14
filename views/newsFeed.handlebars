@@ -34,7 +34,6 @@
             Confirmed attendees: {{this.Attendees}}
             {{/if}}
             <br>
-            {{!-- <button data-hangoutId="{{this.id}}" class="delplan">Delete Plan!</button> --}}
           </p>
           <img id='{{this.id}}' class="join" src='../images/Favorites.png' type='image/png'>
           <br>
@@ -57,21 +56,20 @@
     </div>
     <div class="col-md-3"></div>
   </div>
-
 </div>
-
 <br>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 <script>
-  $('.join').on("click",async function(event) {
+  $('.join').on("click", async function (event) {
     event.preventDefault();
-    console.log("Hello!!!!!!")
-    console.log(event.target)
-    console.log(this.id)
-    const {id, username, email} = await $.ajax('/api/user_data')
-    console.log(id, username, email)
+ //   console.log("Hello!!!!!!")
+ //   console.log(event.target)
+ //   console.log(this.id)
+    const { id, username, email } = await $.ajax('/api/user_data');
+    
+  //  console.log(id, username, email)
     $.ajax('/api/hangout/' + this.id, {
       type: "PUT",
       contentType: 'application/json',
@@ -81,30 +79,7 @@
         email: email
       })
     })
-    // Get the ID by finding an element with a "name" attribute equal to the string "id"
-//   var id= this.name;
- //  console.log(id)
-
- //   INSERT INTO Hangouts (HangoutAtendees) 
- //  VALUES ()
-
-//    var updatedHangoutAtendees = {
-  //    Hangout: $("#join [name=hangoutId]").val().trim()
-
-
-  //  };
-
-    // Send the PUT request.
-  //  $.ajax("/api/plans/" + id, {
-//      type: "PUT",
-  //    data: updatedHangoutAtendees
-    //}).then(
-      //function() {
-        //console.log("updated id ", id);t
-      //  location.reload();
-     // }
-   // );
+    location.reload()
   });
 
-  </script>
-  
+</script>

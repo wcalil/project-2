@@ -113,10 +113,7 @@ module.exports = function (app) {
     })
     
     res.send()
-    // db.Hangout.update(req.body, { where: { id: req.body.id } }
-    // ).then(function (dbHangout) {
-    //   res.json(dbHangout);
-    // })
+
   })
 
   app.get("/api/hangout", function (req, res) {
