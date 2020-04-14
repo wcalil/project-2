@@ -39,16 +39,24 @@ module.exports = function (app) {
     res.sendFile(path.join(__dirname, "../public/members.html"));
   });
 
-  app.get("/newsFeed", function (req, res) {
-    db.Hangout.findAll({}).then(function (dbHangout) {
+  app.get("/newsFeed", isAuthenticated, function (req, res) {
+    db.Hangout.findAll({include: [db.User]}).then(function (dbHangout) {
       // console.log(dbHangout)
-      const hangoutArray = dbHangout.map(h => {return {
-        UserId: h.UserId,
-        Date: h.Date,
-        City: h.City,
-        HangoutInput: h.HangoutInput,
-        HangoutComment: h.HangoutComment
-      }})
+
+      const hangoutArray = dbHangout.map(h => {
+        let Attendees = JSON.parse(h.HangoutAtendees) || []
+        console.log(h.User.username)
+        Attendees = Attendees.map(a => a.username)
+        return {
+          id: h.id,
+          UserId: h.User.username,
+          Date: h.Date,
+          City: h.City,
+          HangoutInput: h.HangoutInput,
+          HangoutComment: h.HangoutComment,
+          Attendees: Attendees
+        }
+      })
       res.render("newsFeed", { Hangout: hangoutArray });
     })
   });

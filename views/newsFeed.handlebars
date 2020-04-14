@@ -8,7 +8,6 @@
   </div>
 </nav>
 <div class="containerWelcome">
-
   <div class="row">
     <div class="col-md-3"></div>
     <div class="col-md-6 Welcome">
@@ -17,35 +16,29 @@
     </div>
     <div class="col-md-3"></div>
   </div>
-
   <div class="row">
     <div class="col-md-3"></div>
     <div class="col-md-6">
       <div class="row">
         <div class="hangoutNewsFeed">
           {{#each Hangout}}
-
           <p>
             <br>
             Posted by {{this.UserId}}
             <br>
-            There will be a hangout
-            {{this.HangoutInput}}
-            going on in
-            {{this.Date}}
-            at
-            {{this.City}}
+            There will be a hangout {{this.HangoutInput}} going on in {{this.Date}} at {{this.City}}
             <br>
-            The hangout is about:
-            {{this.HangoutComment}}
+            The hangout is about: {{this.HangoutComment}}
             <br>
-
-            {{!-- <button data-planid="{{this.id}}" class="delplan">Delete Plan!</button> --}}
+            {{#if this.Attendees}}
+            Confirmed attendees: {{this.Attendees}}
+            {{/if}}
+            <br>
+            {{!-- <button data-hangoutId="{{this.id}}" class="delplan">Delete Plan!</button> --}}
           </p>
-          <img id='join' src='../images/Favorites.png' type='image/png'>
+          <img id='{{this.id}}' class="join" src='../images/Favorites.png' type='image/png'>
           <br>
           <hr style='border-top: 10px solid rgb(254, 250, 246)'>
-
           {{/each}}
         </div>
       </div>
@@ -68,3 +61,50 @@
 </div>
 
 <br>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script>
+  $('.join').on("click",async function(event) {
+    event.preventDefault();
+    console.log("Hello!!!!!!")
+    console.log(event.target)
+    console.log(this.id)
+    const {id, username, email} = await $.ajax('/api/user_data')
+    console.log(id, username, email)
+    $.ajax('/api/hangout/' + this.id, {
+      type: "PUT",
+      contentType: 'application/json',
+      data: JSON.stringify({
+        id: id,
+        username: username,
+        email: email
+      })
+    })
+    // Get the ID by finding an element with a "name" attribute equal to the string "id"
+//   var id= this.name;
+ //  console.log(id)
+
+ //   INSERT INTO Hangouts (HangoutAtendees) 
+ //  VALUES ()
+
+//    var updatedHangoutAtendees = {
+  //    Hangout: $("#join [name=hangoutId]").val().trim()
+
+
+  //  };
+
+    // Send the PUT request.
+  //  $.ajax("/api/plans/" + id, {
+//      type: "PUT",
+  //    data: updatedHangoutAtendees
+    //}).then(
+      //function() {
+        //console.log("updated id ", id);t
+      //  location.reload();
+     // }
+   // );
+  });
+
+  </script>
+  
