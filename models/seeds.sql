@@ -5,7 +5,3 @@ USE user_credentials;
 INSERT INTO users (username, email, password, createdAt, UpdatedAt)
 VALUES ("wcalil","wcalil@gmail.com", "123", CURDATE(), CURDATE());
 
-INSERT INTO interests (interest, createdAt, UpdatedAt) 
-VALUES ("Play Soccer", CURDATE(), CURDATE()),  
-("Go to the museum", CURDATE(), CURDATE())
-

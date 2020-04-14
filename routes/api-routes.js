@@ -78,6 +78,7 @@ module.exports = function (app) {
       HangoutComment: req.body.HangoutComment,
       City: req.body.City,
       Date: new Date(req.body.Date),
+      HangoutAtendees: req.body.HangoutAtendees,
       UserId: req.user.id,
 
     })
@@ -99,10 +100,23 @@ module.exports = function (app) {
   })
   // Update your Users Hangout
   app.put("/api/hangout/:id", function (req, res) {
-    db.Hangout.update(req.body, { where: { id: req.body.id } }
-    ).then(function (dbHangout) {
-      res.json(dbHangout);
+    console.log('PUT hangout', req.body)
+    db.Hangout.findOne({where: {id: req.params.id}})
+    .then( hangOut => {
+      let atendees = JSON.parse(hangOut.dataValues.HangoutAtendees) || []
+      atendees.push(req.body)
+      db.Hangout.update({HangoutAtendees: JSON.stringify(atendees)},{
+        where: {
+          id: req.params.id
+        }
+      }).then(()=>res.sendStatus(203)).catch(e=>{if(e) {res.status(500).send(e)};})
     })
+    
+    res.send()
+    // db.Hangout.update(req.body, { where: { id: req.body.id } }
+    // ).then(function (dbHangout) {
+    //   res.json(dbHangout);
+    // })
   })
 
   app.get("/api/hangout", function (req, res) {

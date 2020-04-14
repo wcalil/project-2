@@ -23,6 +23,12 @@ module.exports = function (sequelize, DataTypes) {
             allowNull: false
         },
 
+        HangoutAtendees: {
+            type: DataTypes.STRING,
+            allowNull: true,
+            unique: false,
+        },
+
     });
 
     Hangout.associate = function (models) {

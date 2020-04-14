@@ -73,6 +73,7 @@ $(document).ready(function() {
         HangoutComment.val(data.HangoutComment);
         City: val(data.City);
         Date.val(data.Date);
+        HangoutAtendees.val(data.HangoutAtendees);
         // If we have a post with this id, set a flag for us to know to update the post
         // when we hit submit
         updating = true;
