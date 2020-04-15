@@ -111,8 +111,7 @@ module.exports = function (app) {
         }
       }).then(()=>res.sendStatus(203)).catch(e=>{if(e) {res.status(500).send(e)};})
     })
-    
-    res.send()
+  
 
   })
 
