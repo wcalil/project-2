@@ -8,6 +8,7 @@ var passport = require("./config/passport");
 var PORT = process.env.PORT || 8080;
 var db = require("./models");
 
+
 // Creating express app and configuring middleware needed for authentication
 var app = express();
 app.use(express.urlencoded({ extended: true }));
@@ -17,6 +18,18 @@ app.use(express.static("public"));
 app.use(session({ secret: "keyboard cat", resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
+
+
+// Parse request body as JSON
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+// Set Handlebars.
+var exphbs = require("express-handlebars");
+
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
+
 
 // Requiring our routes
 require("./routes/html-routes.js")(app);
