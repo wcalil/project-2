@@ -45,8 +45,8 @@ module.exports = function (app) {
 
       const hangoutArray = dbHangout.map(h => {
         let Attendees = JSON.parse(h.HangoutAtendees) || []
-        console.log(h.User.username)
-        Attendees = Attendees.map(a => a.username)
+        console.log(h.User.username);
+        Attendees = Attendees.map(a => a.username);
         return {
           id: h.id,
           UserId: h.User.username,
